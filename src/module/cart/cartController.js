@@ -95,5 +95,6 @@ export {
     getCart,
     removeCartItem,
     updateCart,
+    applyCoupon,
     deleteCart
 }

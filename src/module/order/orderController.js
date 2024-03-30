@@ -6,12 +6,13 @@ import cartModel from "../../../DB/Model/cart.model.js";
 import ProductModel from "../../../DB/Model/product.model.js";
 import express from "express";
 import Stripe from 'stripe';
+import userModel from "../../../DB/Model/user.model.js";
 const stripe = new Stripe(process.env.STRIPE_KEY);
 
 const createOrder = handleError(async (req, res, next) => {
     // 1- cart ..... req.params.id
     let cart = await cartModel.findById(req.params.id);
-    if(!cart) return next(new AppError("Cart not Found",404));
+    if(!cart) return next(new AppError("Cart not Found",400));
     //2- totalprice
     let totalOrderPrice = cart.totalPriceAfterDiscount ? cart.totalPriceAfterDiscount : cart.totalPrice;
     //3-create order
@@ -22,6 +23,7 @@ const createOrder = handleError(async (req, res, next) => {
         shippingAddress: req.body.shippingAddress,
 
     });
+    await order.save();
     //4-update sold & quantity
     if (order) {
         let options = cart.cartItems.map(item => ({
@@ -32,7 +34,7 @@ const createOrder = handleError(async (req, res, next) => {
         }));
 
         await ProductModel.bulkWrite(options);
-        await order.save();
+        
     } else {
         return next(AppError("Error Occurs", 409));
     }
@@ -106,7 +108,31 @@ const createOnlineOrder = handleError(async (req, res) => {
   if(event.type == "checkout.session.completed"){
     const checkoutSessionCompleted = event.data.object;
     //create Order
-    console.log("done");
+
+    let cart = await cartModel.findById(checkoutSessionCompleted.client_reference_id);
+    if(!cart) return next(new AppError("Cart not Found",400));
+
+    let user = await userModel.findOne({email:checkoutSessionCompleted.customer_email});
+    if(!user) return next(new AppError("User not Found",400));
+
+    let order = new orderModel({
+        user: user._id,
+        cartItems: cart.cartItems,
+        totalOrderPrice: checkoutSessionCompleted.amount_total/100,
+        shippingAddress: checkoutSessionCompleted.metadata,
+
+    });
+    await order.save();
+
+        let options = cart.cartItems.map(item => ({
+            updateOne: {
+                filter: { _id: item.product },
+                update: { $inc: { quantity: -item.quantity, sold: item.quantity } }
+            }
+        }));
+
+        await ProductModel.bulkWrite(options);
+        
   }else{
     console.log(`Unhandled event type ${event.type}`);
   }
