@@ -99,7 +99,7 @@ const createOnlineOrder = handleError(async (req, res) => {
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(req.body, sig, String(process.env.WEBHOOK_KEY));
+    event = stripe.webhooks.constructEvent(req.body, sig, "whsec_kNaKNDqH5Q2UsO3gs4yR9XlC3ZFzdQgv");
   } catch (err) {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
@@ -140,7 +140,6 @@ const createOnlineOrder = handleError(async (req, res) => {
   }
 
   await cartModel.findByIdAndDelete(cart._id);
-
   // Return a 200 res to acknowledge receipt of the event
   res.json({message:"Done"});
 });
