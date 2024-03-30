@@ -1,15 +1,20 @@
 import Joi from "joi";
 
-export const signUpVal = Joi.object({
-    username:Joi.string().min(3).max(12).required(),
-    email: Joi.string().email().required(),
-    password:Joi.string().required(),
-    phone:Joi.string().required(),
-    role:Joi.string().valid("User"),
+export const createCouponVal = Joi.object({
+    code:Joi.string().max(12).required(),
+    expires:Joi.string().required(),
+    discount:Joi.number().required(),
 
 });
 
-export const signInVal = Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().required(),
-})
+export const updateCouponVal = Joi.object({
+    id: Joi.string().hex().length(24).required(),
+    expires:Joi.string().required(),
+    discount:Joi.number().required(),
+
+});
+
+export const getCouponVal = Joi.object({
+    id: Joi.string().hex().length(24).required(),
+
+});
