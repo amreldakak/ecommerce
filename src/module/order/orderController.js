@@ -57,7 +57,7 @@ const getAllOrder = handleError(async (req, res, next) => {
     let order = await apiFeature.mongooseQuery;
     //let order = await orderModel.find({ user: req.user._id });
     if (!order) return next(AppError("Not Order Found", 401));
-    res.json({ message: "Orders", order });
+    res.json({ message: "Orders", page:apiFeature.page,order });
 });
 
 const onlinePayment = handleError(async (req, res, next) => {
