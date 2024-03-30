@@ -16,12 +16,11 @@ const addAddress = handleError( async(req,res,next)=>{
 
 const removeFromAddress = handleError( async(req,res,next)=>{
 
-    let {product} = req.body;
-    let updatedReview = await userModel.findOneAndUpdate({_id:req.user._id},{
-        $pull:{Address: product},
+    let address = await userModel.findOneAndUpdate({_id:req.user._id},{
+        $pull:{address: {_id:req.params.id}},
     },{new:true});
-    updatedReview && res.json({message:"Done",updatedReview});
-    !updatedReview && res.json({message:"Not Found"});
+    address && res.json({message:"Done",address});
+    !address && res.json({message:"Not Found"});
 });
 
 const getAllAddress = handleError( async(req,res,next)=>{
