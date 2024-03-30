@@ -7,7 +7,7 @@ import { addAddressVal } from "./addressValidation.js";
 const addressRoute = express.Router();
 
 
-addressRoute.patch('/', protectRoutes, allowTo("User"),validation(addAddressVal),addAddress);
+addressRoute.patch('/', protectRoutes, allowTo('User'),validation(addAddressVal),addAddress);
 //addressRoute.delete('/', protectRoutes, validation(getByIdVal),removeFromaddress);
 //addressRoute.get('/', protectRoutes, validation(updateaddressVal),getAlladdress);
 
