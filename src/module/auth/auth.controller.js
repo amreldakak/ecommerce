@@ -44,9 +44,9 @@ const protectRoutes = handleError(async (req,res,next)=>{
 const allowTo = (...roles)=>{
     return handleError(async(req,res,next)=>{
         console.log(req.user.role);
-        if (!roles.includes(req.role)) {
+        if (!roles.includes(req.user.role))  
             return next(new AppError("Not authorized to get in",403));
-          }
+
         next()
     })
 }
