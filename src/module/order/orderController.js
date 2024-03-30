@@ -4,6 +4,7 @@ import { AppError } from "../../../utils/appError.js";
 import orderModel from "../../../DB/Model/order.model.js";
 import cartModel from "../../../DB/Model/cart.model.js";
 import ProductModel from "../../../DB/Model/product.model.js";
+import express from "express";
 import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_KEY);
 
@@ -93,7 +94,7 @@ const createOnlineOrder = handleError(async (req,res,next)=>{
 
 const app = express();
 
-app.post('/webhook', express.raw({type: 'application/json'}), (req, res) => {
+app.post('/webhook', express.raw({type: 'application/json'}), async (req, res) => {
   const sig = req.headers['stripe-signature'];
 
   let event;
