@@ -61,7 +61,6 @@ const onlinePayment = handleError(async (req, res, next) => {
     // 1- cart ..... req.params.id
     let cart = await cartModel.findById(req.params.id);
     if(!cart) return next(new AppError("Cart not Found",404));
-    let image = cart.cartItems.product
     //2- totalprice
     let totalOrderPrice = cart.totalPriceAfterDiscount ? cart.totalPriceAfterDiscount : cart.totalPrice;
     let session = await stripe.checkout.sessions.create({
@@ -72,7 +71,6 @@ const onlinePayment = handleError(async (req, res, next) => {
                     unit_amount: totalOrderPrice * 100,
                     product_data: {
                         name: req.user.username,
-                        image:image,
                     },
                 },
                 quantity: 1,
