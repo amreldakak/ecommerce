@@ -1,5 +1,6 @@
 import categoryRoute from "./Categories/categoryRoutes.js";
 import subCategoryRoute from "./SubCategories/subCategoryRoutes.js";
+import addressRoute from "./address/addressRoutes.js";
 import authRoute from "./auth/auth.routes.js";
 import brandRoute from "./brand/brandRoutes.js";
 import cartRoute from "./cart/cartRoutes.js";
@@ -22,5 +23,6 @@ export const allRoutes = (app)=>{
     app.use("/api/v1/wishList",wishListRoute);
     app.use("/api/v1/coupon",couponRoute);
     app.use("/api/v1/cart",cartRoute);
-    app.use("/api/v1/order",orderRoute)
+    app.use("/api/v1/order",orderRoute);
+    app.use("/api/v1/address",addressRoute);
 }

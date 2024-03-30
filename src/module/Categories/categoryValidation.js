@@ -1,4 +1,3 @@
-import { json } from "express";
 import Joi from "joi";
 
 export const addCategorySchema = Joi.object({
