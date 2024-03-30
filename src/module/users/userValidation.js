@@ -15,7 +15,10 @@ export const getByIdVal = Joi.object({
 
 export const updateUserVal = Joi.object({
     username:Joi.string().min(3).max(12),
-    password:Joi.string(),
     number:Joi.string(),
 
+});
+
+export const changePassVal = Joi.object({
+    password:Joi.string().required(),
 });
