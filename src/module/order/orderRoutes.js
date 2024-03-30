@@ -14,7 +14,6 @@ orderRoute.post("/webhook",express.raw({type: 'application/json'}),createOnlineO
 
 //orderRoute.route("/:id")
 //.patch(protectRoutes,removeCartItem)
-//.delete(deleteCart)
 
 
 

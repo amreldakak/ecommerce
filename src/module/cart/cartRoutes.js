@@ -12,7 +12,6 @@ cartRoute.route("/")
 
 cartRoute.route("/:id")
 .patch(protectRoutes,removeCartItem)
-//.delete(deleteCart)
 
 cartRoute.put("/:code",protectRoutes,applyCoupon)
 
