@@ -31,7 +31,7 @@ const updateUser = handleError( async(req,res)=>{
 
 const changePassword = handleError( async(req,res)=>{
     req.body.changePasswordAt = Date.now(); 
-    let updatedUser = await userModel.findOneAndUpdate({_id:req.params.id},req.body,{new:true});
+    let updatedUser = await userModel.findOneAndUpdate({_id:req.user._id},req.body,{new:true});
     updatedUser && res.json({message:"Done",updatedUser});
     !updatedUser && res.json({message:"Not Found"});
 })

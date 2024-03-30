@@ -49,7 +49,7 @@ userSchema.pre("save",function(){
     this.password=bcrypt.hashSync(this.password,7);
 })
 
-userSchema.pre("findOneAnd",function(){
+userSchema.pre("findOneAndUpdate",function(){
     this._update.password=bcrypt.hashSync(this._update.password,Number(process.env.ROUND));
 })
 
