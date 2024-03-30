@@ -1,5 +1,4 @@
 import { handleError } from "../middleware/HandleAsyncError.js";
-import { deleteOne } from "../Handlers/apiHandler.js";
 import ApiFeature from "../../../utils/ApiFeatures.js";
 import { AppError } from "../../../utils/appError.js";
 import userModel from "../../../DB/Model/user.model.js";

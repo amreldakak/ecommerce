@@ -54,8 +54,10 @@ const getMyOrder = handleError(async (req, res, next) => {
 
 const getAllOrder = handleError(async (req, res, next) => {
 
-    let order = await orderModel.find({ user: req.user._id });
-    if (!order) return next(AppError("Not Found", 401));
+    let apiFeature = new ApiFeature(orderModel.find({ user: req.user._id }),req.query).pagination().sort().search().fields()
+    let order = await apiFeature.mongooseQuery;
+    //let order = await orderModel.find({ user: req.user._id });
+    if (!order) return next(AppError("Not Order Found", 401));
     res.json({ message: "Orders", order });
 });
 
