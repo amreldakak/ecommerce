@@ -1,19 +1,18 @@
 import express from "express";
 import { protectRoutes } from "../auth/auth.controller.js";
-import { createOnlineOrder, createOrder, getMyOrder, onlinePayment } from "./orderController.js";
-
+import { createOnlineOrder, createOrder, getAllOrder, getMyOrder, onlinePayment } from "./orderController.js";
+import { validation } from "../middleware/validation.js"
+import { OrderByIdVal } from "./orderValidation.js";
 
 const orderRoute = express.Router();
 
 
-orderRoute.route("/:id").post(protectRoutes, createOrder)
-orderRoute.route("/onlinepayment/:id").post(protectRoutes, onlinePayment)
+orderRoute.route("/:id").post(protectRoutes, validation(OrderByIdVal), createOrder)
+orderRoute.route("/onlinepayment/:id").post(protectRoutes, validation(OrderByIdVal), onlinePayment)
 orderRoute.route("/").get(protectRoutes, getMyOrder)
-//orderRoute.post("/webhook",express.raw({type: 'application/json'}),createOnlineOrder)
-//.put(protectRoutes,updateCart)
 
-//orderRoute.route("/:id")
-//.patch(protectRoutes,removeCartItem)
+orderRoute.route("/:id")
+.get(protectRoutes,validation(OrderByIdVal),getAllOrder)
 
 
 
