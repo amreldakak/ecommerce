@@ -93,7 +93,7 @@ const onlinePayment = handleError(async (req, res, next) => {
 });
 
 const createOnlineOrder = handleError(async (req, res) => {
-  const sig = req.headers['stripe-signature'];
+  const sig = req.headers['stripe-signature'].toString();
 
   let event;
 
