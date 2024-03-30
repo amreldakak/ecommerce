@@ -4,7 +4,6 @@ import { AppError } from "../../../utils/appError.js";
 import orderModel from "../../../DB/Model/order.model.js";
 import cartModel from "../../../DB/Model/cart.model.js";
 import ProductModel from "../../../DB/Model/product.model.js";
-import express from "express";
 import Stripe from 'stripe';
 import userModel from "../../../DB/Model/user.model.js";
 const stripe = new Stripe(process.env.STRIPE_KEY);
@@ -54,7 +53,7 @@ const getMyOrder = handleError(async (req, res, next) => {
 
 const getAllOrder = handleError(async (req, res, next) => {
 
-    let apiFeature = new ApiFeature(orderModel.find({ user: req.user._id }),req.query).pagination().sort().search().fields()
+    let apiFeature = new ApiFeature(orderModel.find(),req.query).pagination().sort().search().fields()
     let order = await apiFeature.mongooseQuery;
     //let order = await orderModel.find({ user: req.user._id });
     if (!order) return next(AppError("Not Order Found", 401));
