@@ -1,6 +1,6 @@
 import express from "express";
 import { protectRoutes } from "../auth/auth.controller.js";
-import { addCart, applyCoupon, deleteCart, getCart, removeCartItem, updateCart } from "./cartController.js";
+import { addCart, applyCoupon, getCart, removeCartItem, updateCart } from "./cartController.js";
 
 const cartRoute = express.Router();
 
