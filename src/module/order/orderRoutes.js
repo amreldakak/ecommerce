@@ -8,7 +8,7 @@ const orderRoute = express.Router();
 
 
 orderRoute.route("/:id").post(protectRoutes, validation(createOrderVal), createOrder)
-orderRoute.route("/onlinepayment/:id").post(protectRoutes, validation(OrderByIdVal), onlinePayment)
+orderRoute.route("/onlinepayment/:id").post(protectRoutes, validation(createOrderVal), onlinePayment)
 orderRoute.route("/").get(protectRoutes, getMyOrder)
 
 orderRoute.get("/all",protectRoutes, allowTo('Admin'),getAllOrder)
