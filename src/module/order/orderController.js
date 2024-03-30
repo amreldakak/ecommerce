@@ -118,6 +118,9 @@ const createOnlineOrder = handleError(async (req, res) => {
         cartItems: cart.cartItems,
         totalOrderPrice: checkoutSessionCompleted.amount_total/100,
         shippingAddress: checkoutSessionCompleted.metadata,
+        isPaid:true,
+        paymentMethod:"credit",
+        paidAt:Date.now(),
 
     });
     await order.save();
