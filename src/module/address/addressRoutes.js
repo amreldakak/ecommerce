@@ -2,7 +2,7 @@ import express from "express";
 import { allowTo, protectRoutes } from "../auth/auth.controller.js";
 import { addAddress} from "./addressController.js";
 import {validation} from "./../middleware/validation.js"
-import { addToaddressVal, getByIdVal, updateaddressVal } from "./addressValidation.js";
+import { addToaddressVal } from "./addressValidation.js";
 
 const addressRoute = express.Router();
 
