@@ -8,6 +8,7 @@ import  QRCode  from "qrcode";
 const addCoupon = handleError( async (req,res,next)=>{
    
     let add = new couponModel(req.body);
+    let url = await QRCode.toDataURL(updatedCoupon.code)
     let addedCoupon = await add.save();
     res.json({message:"Done",addedCoupon});
 })
