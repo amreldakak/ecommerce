@@ -11,8 +11,7 @@ orderRoute.route("/:id").post(protectRoutes, validation(createOrderVal), createO
 orderRoute.route("/onlinepayment/:id").post(protectRoutes, validation(OrderByIdVal), onlinePayment)
 orderRoute.route("/").get(protectRoutes, getMyOrder)
 
-orderRoute.route("/:id")
-.get(protectRoutes, allowTo('Admin'),validation(OrderByIdVal),getAllOrder)
+orderRoute.get("/all",protectRoutes, allowTo('Admin'),validation(OrderByIdVal),getAllOrder)
 
 
 
