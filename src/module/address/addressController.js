@@ -25,8 +25,8 @@ const removeFromAddress = handleError( async(req,res,next)=>{
 
 const getAllAddress = handleError( async(req,res,next)=>{
 
-    let result = await userModel.findOne({_id:req.user._id}).populate("Address");
-    result && res.json({message:"Done",result: result.Address});
+    let result = await userModel.findOne({_id:req.user._id});
+    result && res.json({message:"Done",result: result.address});
     !result && res.json({message:"Not Found"});
 });
 

@@ -7,8 +7,8 @@ import { addToWishlistVal, updateWishlistVal } from "./wishListValidation.js";
 const wishListRoute = express.Router();
 
 
-wishListRoute.patch('/', protectRoutes, validation(addToWishlistVal),addToWishList);
-wishListRoute.delete('/', protectRoutes,removeFromWishList);
-wishListRoute.get('/', protectRoutes, validation(updateWishlistVal),getAllWishList);
+wishListRoute.patch('/', protectRoutes, allowTo('User','Admin'),validation(addToWishlistVal),addToWishList);
+wishListRoute.delete('/', protectRoutes,allowTo('User','Admin'),validation(updateWishlistVal),removeFromWishList);
+wishListRoute.get('/', protectRoutes, allowTo('User','Admin'),getAllWishList);
 
 export default wishListRoute;
