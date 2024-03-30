@@ -8,7 +8,7 @@ const couponRoute = express.Router();
 
 
 couponRoute.route("/")
-.post(validation(createCouponVal),addCoupon)
+.post(protectRoutes,allowTo('Admin'),validation(createCouponVal),addCoupon)
 .get(getCoupons)
 
 couponRoute.route("/:id")

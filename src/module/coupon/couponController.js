@@ -6,7 +6,10 @@ import couponModel from "../../../DB/Model/coupon.model.js";
 import  QRCode  from "qrcode";
 
 const addCoupon = handleError( async (req,res,next)=>{
-   
+
+    let check = await couponModel.find({code:req.body.code})
+    if(!check) return next(new AppError("Already exist",409));
+
     let add = new couponModel(req.body);
     let url = await QRCode.toDataURL(add.code)
     let addedCoupon = await add.save();

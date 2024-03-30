@@ -1,3 +1,4 @@
+import { date } from "joi";
 import mongoose from "mongoose";
 
 const Schema = new mongoose.Schema({
@@ -11,7 +12,7 @@ const Schema = new mongoose.Schema({
         type:Number,
         min:0,
     },
-    expires: String
+    expires: Date
 
 },{
     timestamps:true,
