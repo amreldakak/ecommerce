@@ -24,7 +24,7 @@ const getUserById = handleError( async(req,res)=>{
 })
 
 const updateUser = handleError( async(req,res)=>{
-    let updatedUser = await userModel.findByIdAndUpdate(req.params.id,req.body,{new:true});
+    let updatedUser = await userModel.findByIdAndUpdate(req.user._id,req.body,{new:true});
     updatedUser && res.json({message:"Done",updatedUser});
     !updatedUser && res.json({message:"Not Found"});
 })

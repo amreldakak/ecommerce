@@ -9,3 +9,13 @@ export const addUserVal = Joi.object({
 
 });
 
+export const getByIdVal = Joi.object({
+    id: Joi.string().hex().length(24).required()
+});
+
+export const updateUserVal = Joi.object({
+    username:Joi.string().min(3).max(12),
+    password:Joi.string(),
+    number:Joi.string(),
+
+});
