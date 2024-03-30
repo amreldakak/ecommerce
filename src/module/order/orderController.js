@@ -139,9 +139,11 @@ const createOnlineOrder = handleError(async (req, res) => {
     console.log(`Unhandled event type ${event.type}`);
   }
 
-  await cartModel.findByIdAndDelete(cart._id);
+  
   // Return a 200 res to acknowledge receipt of the event
   res.json({message:"Done"});
+
+  await cartModel.findByIdAndDelete(cart._id);
 });
 
 export {
