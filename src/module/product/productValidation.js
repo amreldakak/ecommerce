@@ -41,15 +41,15 @@ export const getByIdSchema = Joi.object({
 })
 
 export const updateProductSchema = Joi.object({
-    title: Joi.string().min(3).max(30).required(),
+    title: Joi.string().min(3).max(30),
     id: Joi.string().hex().length(24).required(),
-    description: Joi.string().min(3).max(300).required().trim(),
-    price: Joi.number().min(0).required(),
-    priceAfterDiscount: Joi.number().min(0).required(),
-    quantity: Joi.number().min(0).required(),
-    category: Joi.string().hex().length(24).required(),
-    subCategory: Joi.string().hex().length(24).required(),
-    brand: Joi.string().hex().length(24).required(),
+    description: Joi.string().min(3).max(300).trim(),
+    price: Joi.number().min(0),
+    priceAfterDiscount: Joi.number().min(0),
+    quantity: Joi.number().min(0),
+    category: Joi.string().hex().length(24),
+    subCategory: Joi.string().hex().length(24),
+    brand: Joi.string().hex().length(24),
     createdBy: Joi.string().hex().length(24).optional(),
 
     imageCover: Joi.array().items(Joi.object({
@@ -61,7 +61,7 @@ export const updateProductSchema = Joi.object({
             filename: Joi.string().required(),
             path: Joi.string().required(),
             size: Joi.number().max(5242880).required()
-    }).required()).required(),
+    })),
 
     images: Joi.array().items(Joi.object({
         fieldname: Joi.string().required(),
@@ -72,6 +72,6 @@ export const updateProductSchema = Joi.object({
         filename: Joi.string().required(),
         path: Joi.string().required(),
         size: Joi.number().max(5242880).required()
-}).required()).required()
+}))
     
 })

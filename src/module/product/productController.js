@@ -30,7 +30,9 @@ const getProductById = handleError( async(req,res)=>{
 })
 
 const updateProduct = handleError( async(req,res)=>{
-    req.body.slug = slugify(req.body.title);
+    if(req.body.title){
+        req.body.slug = slugify(req.body.title);
+    }
     if(req.files.imageCover) req.body.imageCover= req.files.imageCover[0].filename;
     if(req.files.images) req.body.images=req.files.images.map(ele => ele.filename);
     let updatedProduct = await ProductModel.findByIdAndUpdate(req.params.id,req.body,{new:true});
