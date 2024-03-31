@@ -19,6 +19,9 @@ const addCart = handleError( async (req,res,next)=>{
 
     let product = await ProductModel.findById(req.body.product);
     if(!product) return next(new AppError("Not Found",404));
+
+    if(req.body.quantity > product.quantity) return next(new AppError("Sold Out",401));
+
     req.body.price=product.price;
     let isCartExist = await cartModel.findOne({user:req.user._id});
     if(!isCartExist){
@@ -34,6 +37,7 @@ const addCart = handleError( async (req,res,next)=>{
 
     let item = isCartExist.cartItems.find((ele) => ele.product == req.body.product);
     if(item){
+        if(item.quantity >= product.quantity) return next(new AppError("Sold Out",401));
         item.quantity += 1;
     }else{
         isCartExist.cartItems.push(req.body)
